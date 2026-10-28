@@ -1,0 +1,21 @@
+# godot-cpp is a plain clone - see AGENTS.md for how to fetch it
+/godot-cpp/
+
+# Godot editor binary (downloaded for convenience)
+/editor/
+
+# Godot 4 import/cache directory
+game/.godot/
+
+# Build artifacts
+game/bin/
+*.o
+*.obj
+*.exp
+*.lib
+*.pdb
+
+# Extracted MapleStory assets (Nexon IP - never commit)
+game/assets/extracted/
+tools/extractor/out/
+.sconsign.dblite
