@@ -1,3 +1,5 @@
 [gd_scene format=3 uid="uid://b8maple0main1"]
 
 [node name="Main" type="HelloNode"]
+
+[node name="DebugMap" type="DebugMap" parent="."]

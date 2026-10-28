@@ -4,6 +4,7 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
+#include "debug_map.h"
 #include "hello_node.h"
 
 using namespace godot;
@@ -13,6 +14,7 @@ void initialize_maple_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 
+	GDREGISTER_CLASS(DebugMap);
 	GDREGISTER_CLASS(HelloNode);
 }
 
