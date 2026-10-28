@@ -1,0 +1,20 @@
+[
+  {
+    "label": "scons: build extension",
+    "command": "scons platform=windows target=template_debug api_version=4.7 -j6",
+    "hide": "never",
+    "reveal": "always"
+  },
+  {
+    "label": "scons: regenerate compile_commands.json",
+    "command": "scons platform=windows target=template_debug api_version=4.7 compiledb -j6",
+    "hide": "on_success",
+    "reveal": "always"
+  },
+  {
+    "label": "godot: run project headless",
+    "command": "editor\\Godot_v4.7.2-stable_win64_console.exe --headless --path game --quit-after 60",
+    "hide": "never",
+    "reveal": "always"
+  }
+]

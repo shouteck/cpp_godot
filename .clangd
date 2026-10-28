@@ -1,0 +1,9 @@
+CompileFlags:
+  # compile_commands.json contains MSVC (cl.exe) style flags;
+  # --driver-mode=cl makes clangd parse them correctly.
+  Add:
+    - --driver-mode=cl
+  Remove:
+    - /Fo*
+    - /external:I*
+    - /external:W*

@@ -43,6 +43,17 @@ Expected output: `HelloNode: hello from C++ (GDExtension loaded)`.
 Note: `--editor --quit` currently segfaults on exit AFTER printing — appears
 to be a headless-shutdown quirk, not a build problem. Keep an eye on it.
 
+## Editor setup (Zed / clangd)
+
+- `compile_commands.json` is generated (gitignored). Regenerate after adding
+  files to `src/`:
+  `scons platform=windows target=template_debug api_version=4.7 compiledb -j6`
+- `.clangd` adds `--driver-mode=cl` so clangd parses the MSVC-style flags
+  in the compile database.
+- `.zed/tasks.json` has tasks: build extension, regenerate compile db,
+  run project headless (spawn via `task: spawn` in Zed).
+- Zed auto-downloads clangd on first C++ file open.
+
 ## Gotchas learned
 
 - godot-cpp tags: `godot-X.Y-stable` through 4.5, then switched to own

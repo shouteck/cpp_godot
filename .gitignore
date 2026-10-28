@@ -9,6 +9,7 @@ game/.godot/
 
 # Build artifacts
 game/bin/
+compile_commands.json
 *.o
 *.obj
 *.exp
