@@ -1,6 +1,8 @@
 #include "debug_map.h"
+#include "foothold.h"
 
 #include <godot_cpp/core/class_db.hpp>
+#include <vector>
 
 void DebugMap::_bind_methods() {
 }
@@ -20,4 +22,8 @@ void DebugMap::_draw() {
     for (const Foothold &fh : footholds) {
         draw_line(fh.start, fh.end, godot::Color(1, 1, 1), 2.0);
     }
+}
+
+const std::vector<Foothold>& DebugMap::get_footholds() const {
+    return footholds;
 }

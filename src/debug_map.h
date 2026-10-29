@@ -13,6 +13,7 @@ class DebugMap : public godot::Node2D {
     public:
         void _ready() override;
         void _draw() override;
+        const std::vector<Foothold>& get_footholds() const;
     private:
         std::vector<Foothold> footholds;
 };

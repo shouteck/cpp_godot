@@ -3,3 +3,5 @@
 [node name="Main" type="HelloNode"]
 
 [node name="DebugMap" type="DebugMap" parent="."]
+
+[node name="Player" type="Player" parent="."]
