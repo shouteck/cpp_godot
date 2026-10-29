@@ -48,6 +48,30 @@ void Map::load(const godot::String &path) {
             nullptr
         });
     }
+
+    for (int i = 0; i < fhs.size(); i++) {
+        godot::Dictionary d = fhs[i];
+        Foothold &fh = footholds[i];
+
+        int prev_id = d["prev"];
+        int next_id = d["next"];
+        auto pit = fh_index.find(prev_id);
+        auto nit = fh_index.find(next_id);
+        if (pit != fh_index.end()) fh.prev = &footholds[pit->second];
+        if (nit != fh_index.end()) fh.next = &footholds[nit->second];
+    }
+
+    godot::Array lads = root["ladders"];
+    for (int i = 0; i < lads.size(); i++) {
+        godot::Dictionary d = lads[i];
+        auto it = fh_index.find((int)d["uf"]);
+        if (it == fh_index.end()) continue;
+        ladders.push_back(Ladder{(int)d["id"],
+            (double)d["x"],
+            (double)d["y1"],
+            (double)d["y2"],
+            &footholds[it->second]});
+    }
 }
 
 const std::vector<Foothold>& Map::get_footholds() const {
