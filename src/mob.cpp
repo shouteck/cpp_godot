@@ -17,8 +17,29 @@ void Mob::_ready() {
     x = 150.0;
 }
 
+void Mob::take_damage(double dir) {
+    if (dead) return;
+    hp -= 1;
+    x += dir * KNOCKBACK;
+    if (hp <= 0) {
+        dead = true;
+        respawn_timer = RESPAWN_DELAY;
+        godot::UtilityFunctions::print("mob died");
+    }
+}
+
 void Mob::_physics_process(double delta) {
     if (!map || !current) return;
+
+    if (dead) {
+        respawn_timer -= delta;
+        if (respawn_timer <= 0.0) {
+            dead = false;
+            hp = 3;
+            x = spawn_x;
+        }
+        return;
+    }
 
     x += dir * PATROL_SPEED * delta;
 
@@ -45,6 +66,7 @@ void Mob::_physics_process(double delta) {
         godot::Vector2 dp = player->get_position() - get_position();
         bool now = std::abs(dp.x) < 14.0 && dp.y > -10.0 && dp.y < 24.0;
         if (now && !touching) {
+            player->take_damage(dp.x > 0 ? 1.0 : -1.0);
             godot::UtilityFunctions::print("mob touched the player!");
         }
         touching = now;

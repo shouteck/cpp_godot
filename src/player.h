@@ -17,6 +17,7 @@ public:
 	void _ready() override;
 	void _draw() override;
 	void _physics_process(double delta) override;
+	void take_damage(double dir);
 
 private:
 	const std::vector<Foothold> *map = nullptr;
@@ -43,6 +44,13 @@ private:
 
 	static constexpr double CLIMB = 150.0;
 	static constexpr double GRAB_RANGE = 15.0;
+
+	double facing = 1.0;
+	int hp = 3;
+	double iframes = 0.0;
+
+	static constexpr double IFRAME_TIME = 1.0;
+	static constexpr double ATTACK_REACH = 40.0;
 };
 
 #endif

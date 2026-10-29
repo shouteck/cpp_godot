@@ -1,5 +1,6 @@
 #include "player.h"
 #include "debug_map.h"
+#include "mob.h"
 #include <godot_cpp/classes/input.hpp>
 
 #include <algorithm>
@@ -17,8 +18,29 @@ void Player::_ready() {
     ladders = &map_node->get_ladders();
 }
 
+void Player::take_damage(double dir) {
+    if (iframes > 0.0) return;
+    hp -= 1;
+    iframes = IFRAME_TIME;
+    state = State::Airborne;
+    y = current->y_at(x);
+    vx = dir * 200.0;
+    vy = -150.0;
+    if (hp <= 0) {
+        x = 50.0;
+        current = &(*map)[0];
+        y = current->y_at(x);
+        vx = 0.0;
+        vy = 0.0;
+        hp = 3;
+        state = State::Grounded;
+    }
+}
+
 void Player::_physics_process(double delta) {
     if (!map || !current) return;
+
+    iframes -= delta;
 
     godot::Input *input = godot::Input::get_singleton();
     double dir = (input->is_action_pressed("ui_right") ? 1.0 : 0.0)
@@ -26,7 +48,16 @@ void Player::_physics_process(double delta) {
 
     switch (state) {
         case State::Grounded: {
-            if (input->is_action_pressed("ui_up")) {
+            if (input->is_action_just_pressed("attack")) {
+                Mob *mob = cast_to<Mob>(get_parent()->find_child("Mob"));
+                if (mob && !mob->is_dead()) {
+                    double dx = mob->get_position().x - get_position().x;
+                    if (dx * facing > 0.0 && std::abs(dx) < ATTACK_REACH) {
+                        mob->take_damage(facing);
+                    }
+                }
+            }
+            else if (input->is_action_pressed("ui_up")) {
                 double feet_y = current->y_at(x);
                 for (const Ladder &l : *ladders) {
                     if (std::abs(x - l.x) > GRAB_RANGE) continue;
@@ -127,5 +158,6 @@ void Player::_physics_process(double delta) {
 }
 
 void Player::_draw() {
+    if (iframes > 0.0 && int(iframes * 10) % 2 == 0) return;
     draw_rect(godot::Rect2(-6, -24, 12, 24), godot::Color(1.0, 0.4, 0.2));
 }
