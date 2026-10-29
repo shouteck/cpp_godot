@@ -2,6 +2,8 @@
 #include "map.h"
 #include "mob.h"
 #include <godot_cpp/classes/input.hpp>
+#include <godot_cpp/classes/input_event_key.hpp>
+#include <godot_cpp/classes/input_map.hpp>
 
 #include <algorithm>
 #include <cmath>
@@ -10,6 +12,15 @@ void Player::_bind_methods() {
 }
 
 void Player::_ready() {
+    godot::InputMap *im = godot::InputMap::get_singleton();
+    if (!im->has_action("attack")) {
+        im->add_action("attack");
+        godot::Ref<godot::InputEventKey> ev;
+        ev.instantiate();
+        ev->set_physical_keycode(godot::KEY_X);
+        im->action_add_event("attack", ev);
+    }
+
     Map *map_node = Object::cast_to<Map>(get_parent()->find_child("Map"));
     map = &map_node->get_footholds();
     current = &(*map)[0];
