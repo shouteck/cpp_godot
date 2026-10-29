@@ -2,6 +2,7 @@
 #define MAPLE_PLAYER_H
 
 #include "foothold.h"
+#include "ladder.h"
 
 #include <godot_cpp/classes/node2d.hpp>
 #include <vector>
@@ -22,7 +23,6 @@ private:
 	const Foothold *current = nullptr;
 	double x = 0.0;
 
-	bool grounded = true;
 	double vx = 0.0;
 	double vy = 0.0;
 	double y = 0.0;
@@ -31,6 +31,18 @@ private:
 	static constexpr double GRAVITY = 1500.0;
 
 	static constexpr double JUMP = 800.0;
+
+	enum class State {
+	    Grounded,
+		Airborne,
+		OnRope
+	};
+	State state = State::Grounded;
+	const std::vector<Ladder> *ladders = nullptr;
+	const Ladder *rope = nullptr;
+
+	static constexpr double CLIMB = 150.0;
+	static constexpr double GRAB_RANGE = 15.0;
 };
 
 #endif

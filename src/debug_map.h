@@ -2,6 +2,7 @@
 #define MAPLE_DEBUG_MAP_H
 
 #include "foothold.h"
+#include "ladder.h"
 
 #include <godot_cpp/classes/node2d.hpp>
 #include <vector>
@@ -14,8 +15,10 @@ class DebugMap : public godot::Node2D {
         void _ready() override;
         void _draw() override;
         const std::vector<Foothold>& get_footholds() const;
+        const std::vector<Ladder>& get_ladders() const;
     private:
         std::vector<Foothold> footholds;
+        std::vector<Ladder> ladders;
 };
 
 #endif

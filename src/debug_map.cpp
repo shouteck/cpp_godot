@@ -1,5 +1,6 @@
 #include "debug_map.h"
 #include "foothold.h"
+#include "ladder.h"
 
 #include <godot_cpp/core/class_db.hpp>
 #include <vector>
@@ -16,14 +17,24 @@ void DebugMap::_ready() {
     footholds[1].prev = &footholds[0];
     footholds[1].next = &footholds[2];
     footholds[2].prev = &footholds[1];
+
+    ladders.push_back(Ladder{0, 300.0, 220.0, 400.0, &footholds[3]});
 }
 
 void DebugMap::_draw() {
     for (const Foothold &fh : footholds) {
         draw_line(fh.start, fh.end, godot::Color(1, 1, 1), 2.0);
     }
+    for (const Ladder &l : ladders) {
+        draw_line(godot::Vector2(l.x, l.y1), godot::Vector2(l.x, l.y2),
+                  godot::Color(0.4, 0.8, 1.0), 2.0);
+    }
 }
 
 const std::vector<Foothold>& DebugMap::get_footholds() const {
     return footholds;
+}
+
+const std::vector<Ladder>& DebugMap::get_ladders() const {
+    return ladders;
 }
