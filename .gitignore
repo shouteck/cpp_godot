@@ -19,4 +19,9 @@ compile_commands.json
 # Extracted MapleStory assets (Nexon IP - never commit)
 game/assets/extracted/
 tools/extractor/out/
+
+# .NET build artifacts + vendored library
+tools/MapleLib/
+tools/extractor/bin/
+tools/extractor/obj/
 .sconsign.dblite
