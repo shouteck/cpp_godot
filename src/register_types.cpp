@@ -6,6 +6,7 @@
 
 #include "debug_map.h"
 #include "hello_node.h"
+#include "mob.h"
 #include "player.h"
 
 using namespace godot;
@@ -17,6 +18,7 @@ void initialize_maple_module(ModuleInitializationLevel p_level) {
 
 	GDREGISTER_CLASS(DebugMap);
 	GDREGISTER_CLASS(HelloNode);
+	GDREGISTER_CLASS(Mob);
 	GDREGISTER_CLASS(Player);
 }
 

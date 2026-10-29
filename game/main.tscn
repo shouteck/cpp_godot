@@ -5,3 +5,5 @@
 [node name="DebugMap" type="DebugMap" parent="."]
 
 [node name="Player" type="Player" parent="."]
+
+[node name="Mob" type="Mob" parent="."]
