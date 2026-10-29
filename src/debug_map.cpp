@@ -2,7 +2,6 @@
 #include "foothold.h"
 #include "ladder.h"
 
-#include <godot_cpp/core/class_db.hpp>
 #include <vector>
 
 void DebugMap::_bind_methods() {

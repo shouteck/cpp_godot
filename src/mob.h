@@ -2,7 +2,6 @@
 #define MAPLE_MOB_H
 
 #include "foothold.h"
-#include "ladder.h"
 
 #include <godot_cpp/classes/node2d.hpp>
 #include <vector>

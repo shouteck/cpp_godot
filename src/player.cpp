@@ -1,8 +1,6 @@
 #include "player.h"
 #include "debug_map.h"
-#include "godot_cpp/classes/input.hpp"
-
-#include <godot_cpp/core/class_db.hpp>
+#include <godot_cpp/classes/input.hpp>
 
 #include <algorithm>
 #include <cmath>
