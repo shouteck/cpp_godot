@@ -1,5 +1,5 @@
 #include "mob.h"
-#include "debug_map.h"
+#include "map.h"
 #include "player.h"
 
 #include <godot_cpp/variant/utility_functions.hpp>
@@ -11,7 +11,7 @@ void Mob::_bind_methods() {
 }
 
 void Mob::_ready() {
-    DebugMap *map_node = Object::cast_to<DebugMap>(get_parent()->find_child("DebugMap"));
+    Map *map_node = Object::cast_to<Map>(get_parent()->find_child("Map"));
     map = &map_node->get_footholds();
     current = &(*map)[0];
     x = 150.0;

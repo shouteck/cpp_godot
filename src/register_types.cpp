@@ -6,6 +6,7 @@
 
 #include "debug_map.h"
 #include "hello_node.h"
+#include "map.h"
 #include "mob.h"
 #include "player.h"
 
@@ -18,6 +19,7 @@ void initialize_maple_module(ModuleInitializationLevel p_level) {
 
 	GDREGISTER_CLASS(DebugMap);
 	GDREGISTER_CLASS(HelloNode);
+	GDREGISTER_CLASS(Map);
 	GDREGISTER_CLASS(Mob);
 	GDREGISTER_CLASS(Player);
 }

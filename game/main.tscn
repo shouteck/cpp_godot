@@ -2,7 +2,7 @@
 
 [node name="Main" type="HelloNode"]
 
-[node name="DebugMap" type="DebugMap" parent="."]
+[node name="Map" type="Map" parent="."]
 
 [node name="Player" type="Player" parent="."]
 
