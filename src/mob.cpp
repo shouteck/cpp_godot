@@ -37,6 +37,7 @@ void Mob::_physics_process(double delta) {
             dead = false;
             hp = 3;
             x = spawn_x;
+            touching = false;
         }
         return;
     }
@@ -76,5 +77,6 @@ void Mob::_physics_process(double delta) {
 }
 
 void Mob::_draw() {
+    if (dead) return;
     draw_rect(godot::Rect2(-8, -10, 16, 10), godot::Color(0.4, 0.8, 0.3));
 }

@@ -46,6 +46,8 @@ void Player::_physics_process(double delta) {
     double dir = (input->is_action_pressed("ui_right") ? 1.0 : 0.0)
         -  (input->is_action_pressed("ui_left") ? 1.0 : 0.0);
 
+    if (dir != 0.0) facing = dir;
+
     switch (state) {
         case State::Grounded: {
             if (input->is_action_just_pressed("attack")) {
