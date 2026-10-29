@@ -21,6 +21,16 @@ private:
 	const std::vector<Foothold> *map = nullptr;
 	const Foothold *current = nullptr;
 	double x = 0.0;
+
+	bool grounded = true;
+	double vx = 0.0;
+	double vy = 0.0;
+	double y = 0.0;
+
+	static constexpr double SPEED = 200.0;
+	static constexpr double GRAVITY = 1500.0;
+
+	static constexpr double JUMP = 800.0;
 };
 
 #endif
