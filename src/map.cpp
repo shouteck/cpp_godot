@@ -72,12 +72,9 @@ void Map::load(const godot::String &path) {
             (double)d["y2"],
             &footholds[it->second]});
     }
-}
 
-const std::vector<Foothold>& Map::get_footholds() const {
-    return footholds;
-}
-
-const std::vector<Ladder>& Map::get_ladders() const {
-    return ladders;
+    godot::Dictionary b = root["bounds"];
+    bounds = godot::Rect2((double)b["left"], (double)b["top"],
+        (double)b["right"] - (double)b["left"],
+        (double)b["bottom"] - (double)b["top"]);
 }

@@ -2,6 +2,7 @@
 #define MAPLE_MAP_H
 
 #include "foothold.h"
+#include "godot_cpp/variant/rect2.hpp"
 #include "ladder.h"
 
 #include <godot_cpp/classes/node2d.hpp>
@@ -20,13 +21,23 @@ public:
 	void _draw() override;
 	void load(const godot::String &path);
 
-	const std::vector<Foothold>& get_footholds() const;
-	const std::vector<Ladder>& get_ladders() const;
+	const std::vector<Foothold>& get_footholds() const {
+	    return footholds;
+	}
+	const std::vector<Ladder>& get_ladders() const {
+	    return ladders;
+	}
+
+	godot::Rect2 get_bounds() const {
+	    return bounds;
+	}
 
 private:
     std::vector<Foothold> footholds;
     std::vector<Ladder> ladders;
     std::unordered_map<int, int> fh_index;
+
+    godot::Rect2 bounds;
 };
 
 #endif

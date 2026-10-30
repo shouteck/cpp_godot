@@ -6,4 +6,6 @@
 
 [node name="Player" type="Player" parent="."]
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
 [node name="Mob" type="Mob" parent="."]

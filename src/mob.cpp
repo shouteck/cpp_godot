@@ -13,8 +13,13 @@ void Mob::_bind_methods() {
 void Mob::_ready() {
     Map *map_node = Object::cast_to<Map>(get_parent()->find_child("Map"));
     map = &map_node->get_footholds();
-    current = &(*map)[0];
-    x = 150.0;
+    for (const Foothold &fh : *map) {
+        if (fh.start.x == fh.end.x) continue;
+        current = &fh;
+        x = (fh.start.x + fh.end.x) / 2.0;
+        spawn_x = x;
+        break;
+    }
 }
 
 void Mob::take_damage(double dir) {

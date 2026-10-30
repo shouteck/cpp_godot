@@ -1,4 +1,7 @@
 #include "player.h"
+#include "godot_cpp/classes/camera2d.hpp"
+#include "godot_cpp/classes/global_constants.hpp"
+#include "godot_cpp/variant/rect2.hpp"
 #include "map.h"
 #include "mob.h"
 #include <godot_cpp/classes/input.hpp>
@@ -23,10 +26,21 @@ void Player::_ready() {
 
     Map *map_node = Object::cast_to<Map>(get_parent()->find_child("Map"));
     map = &map_node->get_footholds();
-    current = &(*map)[0];
+    for (const Foothold &fh : *map) {
+        if (fh.start.x == fh.end.x) continue;
+        current = &fh;
+        break;
+    }
     x = current->start.x;
 
     ladders = &map_node->get_ladders();
+
+    godot::Camera2D *cam = get_node<godot::Camera2D>("Camera2D");
+    godot::Rect2 b = map_node->get_bounds();
+    cam->set_limit(godot::SIDE_LEFT, (int)b.position.x);
+    cam->set_limit(godot::SIDE_TOP, (int)b.position.y);
+    cam->set_limit(godot::SIDE_RIGHT, (int)(b.position.x + b.size.x));
+    cam->set_limit(godot::SIDE_BOTTOM, (int)(b.position.y + b.size.y));
 }
 
 void Player::take_damage(double dir) {
